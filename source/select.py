@@ -1,46 +1,12 @@
 import tkinter as tk
-from tkinter import messagebox  # エラーメッセージ用
-
-class Application(tk.Frame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.pack()
-
-        master.geometry('420x550')
-        master.title('宴会、宿泊選択画面')
-
-        self.create_widgets()
-
-    def create_widgets(self):
-        self.name_placeholder = "例）山田太郎"
-        self.mail_placeholder = "例）mailadd@gmail.com"
-
-        self.name_label = tk.Label(self, text='nama')
-        self.name_label.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-
-        self.name_entry = tk.Entry(self, width=25, fg='gray')
-        self.name_entry.insert(0, self.name_placeholder)
-        self.name_entry.bind("<FocusIn>", self.on_name_entry_click)
-        self.name_entry.bind("<FocusOut>", self.on_name_focus_out)
-        self.name_entry.grid(row=0, column=1, padx=10, pady=5)
-
-        self.gmail_label = tk.Label(self, text='mail')
-        self.gmail_label.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-
-        self.mail_entry = tk.Entry(self, width=25, fg='gray')
-        self.mail_entry.insert(0, self.mail_placeholder)
-        self.mail_entry.bind("<FocusIn>", self.on_mail_entry_click)
-        self.mail_entry.bind("<FocusOut>", self.on_mail_focus_out)
-        self.mail_entry.grid(row=1, column=1, padx=10, pady=5)
-
-        import tkinter as tk
 from tkinter import messagebox
 
 class Application(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.pack()
-
+        
+        master.state('zoomed')
         master.geometry('420x550')
         master.title('宴会、宿泊選択画面')
 
@@ -121,7 +87,14 @@ class Application(tk.Frame):
         if "@" not in mail or "." not in mail:
             messagebox.showerror("形式エラー", "正しいメールアドレスを入力してください。")
             return
-
+        
+        if selection == "宴会":
+            self.destroy()
+            from banquet import Banquet
+            Banquet(self.master, name, mail)
+        elif selection == "宿泊":
+            messagebox.showinfo("選択", "宿泊を選択しました。")
+            
 if __name__ == '__main__':
     root = tk.Tk()
     app = Application(root)

@@ -2,9 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 import json
 import datetime
+from tkinter import filedialog
 
 class EstimateBanquet(tk.Frame):
-  def __init__(self, master, num_people, month, date, num_gouka, num_miyabi, num_nishiki, num_tubaki, num_nomi, num_loin, num_hormone, num_kushiyaki, num_iwatehuro, num_hinokihuro, increse_date):
+  def __init__(self, master, num_people, month, date, num_gouka, num_miyabi, num_nishiki, num_tubaki, num_nomi, num_loin, num_hormone, num_kushiyaki, num_iwatehuro, num_hinokihuro, increse_date, mail, name):
     super().__init__(master)
     self.pack()
     
@@ -13,6 +14,8 @@ class EstimateBanquet(tk.Frame):
     master.title('見積もり画面（宴会）')
     
         # 受け取ったパラメータをインスタンス変数として保存
+    self.mail = mail
+    self.name = name
     self.num_people = num_people
     self.month = month
     self.date = date
@@ -122,17 +125,33 @@ class EstimateBanquet(tk.Frame):
             "total": self.total
         }
 
-        filename = f"estimate_{datetime.datetime.now().strftime('%Y_%m_%d_%H%M%S')}.json"
+        filename = f"{self.name}（{self.mail}）さんの見積もりデータ（宴会）　estimate_{datetime.datetime.now().strftime('%Y_%m_%d_%H%M%S')}.json"
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
 
-        print(f"{filename} に保存しました！")
     
   def send_mail(self):
-    pass
+    from mail import send_mail
+    body = f"""
+    {self.name}様の見積もり内容です。
+    <br>人数：{self.num_people}人
+    <br>日付：{self.month}{self.date}
+    <br>豪華コース：{self.num_gouka}人
+    <br>雅コース：{self.num_miyabi}人
+    <br>錦コース：{self.num_nishiki}人
+    <br>椿コース：{self.num_tubaki}人
+    <br>飲み放題：{self.num_nomi}人
+    <br>八幡平牛ロースのしゃぶしゃぶ：{self.num_loin}人
+    <br>大更ホルモン鍋：{self.num_hormone}人
+    <br>岩手県産牛の串焼き：{self.num_kushiyaki}人
+    <br>岩手山展望露天風呂付和室：{self.num_iwatehuro}部屋
+    <br>檜の内風呂付和洋室：{self.num_hinokihuro}部屋
+    <br>合計金額：{self.total}円
+    """
+    send_mail(self.mail, '宴会見積もり', body)
  
       
 if __name__ == '__main__':
   root = tk.Tk()
-  app = EstimateBanquet(root, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+  app = EstimateBanquet(root, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1)
   app.mainloop()
