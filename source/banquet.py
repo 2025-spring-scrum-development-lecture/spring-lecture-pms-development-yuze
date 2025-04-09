@@ -1,11 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 
-class Estimate(tk.Frame):
-    def __init__(self, master):
+class Banquet(tk.Frame):
+    def __init__(self, master, name, mail):
         super().__init__(master)
         self.pack()
         
+        self.name = name
+        self.mail = mail
         master.state('zoomed')
         master.geometry('700x550')
         master.title('宴会画面')
@@ -102,11 +104,11 @@ class Estimate(tk.Frame):
         
         self.destroy()
         from estimateBanquet import EstimateBanquet
-        EstimateBanquet(self.master, num_people, mounth, date, num_gouka, num_miyabi, num_nishiki, num_tubaki, num_nomi, num_loin, num_hormone, num_kushiyaki, num_iwatehuro, num_hinokihuro, increse_date)
+        EstimateBanquet(self.master, num_people, mounth, date, num_gouka, num_miyabi, num_nishiki, num_tubaki, num_nomi, num_loin, num_hormone, num_kushiyaki, num_iwatehuro, num_hinokihuro, increse_date, self.mail, self.name)
     
 
 
 if __name__ == '__main__':
     root = tk.Tk()
-    app = Estimate(root)
+    app = Banquet(root, 1, 1)
     app.mainloop()

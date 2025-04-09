@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
+import json
+import datetime
 
 class EstimateStay(tk.Frame):
-  def __init__(self, master):
+  def __init__(self, master, ):
     super().__init__(master)
     self.pack()
     
@@ -105,7 +107,7 @@ class EstimateStay(tk.Frame):
       tk.Label(self, text='7200').grid(row=10, column=4, padx=10, pady=5)
       tk.Label(self, text='18400').grid(row=11, column=4, padx=10, pady=5)
       tk.Label(self, text='7200').grid(row=12, column=4, padx=10, pady=5)
-      tk.Label(self, text='20400').grid(row=13, column=4, padx=10, pady=5)
+      tk.Label(self, text='21400').grid(row=13, column=4, padx=10, pady=5)
       tk.Label(self, text='7200').grid(row=14, column=4, padx=10, pady=5)
       tk.Label(self, text='18400').grid(row=15, column=4, padx=10, pady=5)
       tk.Label(self, text='7200').grid(row=16, column=4, padx=10, pady=5)
@@ -124,6 +126,37 @@ class EstimateStay(tk.Frame):
       tk.Label(self, text='1000').grid(row=12, column=10, padx=10, pady=5)
       tk.Label(self, text='300').grid(row=13, column=10, padx=10, pady=5)
       tk.Label(self, text='2500').grid(row=14, column=10, padx=10, pady=5)
+      
+      # 注文数ラベル
+      tk.Label(self, text='12400 * + 15400 * + 18400 * ').grid(row=3, column=6, padx=10, pady=5)
+      tk.Label(self, text='').grid(row=4, column=6, padx=10, pady=5)
+      tk.Label(self, text='12400 * + 15400 * + 18400 * ').grid(row=5, column=6, padx=10, pady=5)
+      tk.Label(self, text='').grid(row=6, column=6, padx=10, pady=5)
+      tk.Label(self, text='12400 * + 15400 * + 18400 * ').grid(row=7, column=6, padx=10, pady=5)
+      tk.Label(self, text='7200 * ').grid(row=8, column=6, padx=10, pady=5)
+      tk.Label(self, text='14400 * + 17400 * + 20400 *').grid(row=9, column=6, padx=10, pady=5)
+      tk.Label(self, text='7200 * ').grid(row=10, column=6, padx=10, pady=5)
+      tk.Label(self, text='12400 * + 15400 * + 18400 * ').grid(row=11, column=6, padx=10, pady=5)
+      tk.Label(self, text='7200 * ').grid(row=12, column=6, padx=10, pady=5)
+      tk.Label(self, text='15400 * + 18400 * + 21400 * ').grid(row=13, column=6, padx=10, pady=5)
+      tk.Label(self, text='7200 * ').grid(row=14, column=6, padx=10, pady=5)
+      tk.Label(self, text='12400 * + 15400 * + 18400 * ').grid(row=15, column=6, padx=10, pady=5)
+      tk.Label(self, text='7200 * ').grid(row=16, column=6, padx=10, pady=5)
+      tk.Label(self, text='12400 * + 15400 * + 18400 * ').grid(row=17, column=6, padx=10, pady=5)
+      tk.Label(self, text='7200 * ').grid(row=18, column=6, padx=10, pady=5)
+      
+      tk.Label(self, text='1000 *').grid(row=3, column=12, padx=10, pady=5)
+      tk.Label(self, text='1800 * + 1000 *  - 1000').grid(row=4, column=12, padx=10, pady=5)
+      tk.Label(self, text='1500 *').grid(row=5, column=12, padx=10, pady=5)
+      tk.Label(self, text='600 * ').grid(row=6, column=12, padx=10, pady=5)
+      tk.Label(self, text='300 * ').grid(row=7, column=12, padx=10, pady=5)
+      tk.Label(self, text='500 * ').grid(row=8, column=12, padx=10, pady=5)
+      tk.Label(self, text='250 * ').grid(row=9, column=12, padx=10, pady=5)
+      tk.Label(self, text='1000 * ').grid(row=10, column=12, padx=10, pady=5)
+      tk.Label(self, text='1500 * ').grid(row=11, column=12, padx=10, pady=5)
+      tk.Label(self, text='1000 * ').grid(row=12, column=12, padx=10, pady=5)
+      tk.Label(self, text='300 * ').grid(row=13, column=12, padx=10, pady=5)
+      tk.Label(self, text='2500 * ').grid(row=14, column=12, padx=10, pady=5)
 
       
       tk.Label(self, text='').grid(row=19, column=0, padx=10, pady=5)
@@ -133,6 +166,14 @@ class EstimateStay(tk.Frame):
       self.mail_btn.grid(row=20, column=3, padx=10, pady=5)
       self.jason_btn = tk.Button(self, text='ジェイソンファイル保存')
       self.jason_btn.grid(row=20, column=4, padx=10, pady=5)
+      
+    
+  def send_mail(self):
+    from mail import send_mail
+    pass
+  
+  def save_to_json(self):
+    pass
       
 if __name__ == '__main__':
   root = tk.Tk()
