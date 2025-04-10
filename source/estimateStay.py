@@ -326,6 +326,13 @@ class EstimateStay(tk.Frame):
       self.jason_btn = tk.Button(self, text='ジェイソンファイル保存', command=self.save_to_json)
       self.jason_btn.grid(row=20, column=4, padx=10, pady=5)
       
+      self.return_btn = tk.Button(self, text='戻る', command=self.returnbtn2)
+      self.return_btn.grid(row=20, column=5, padx=10, pady=5, sticky='ew')
+  def returnbtn2(self):
+      from stay import Stay  # Banquet クラスをインポート
+      self.destroy()  # 現在のウィンドウを閉じる
+      Stay(self.master, self.name, self.mail)  # 新しい画面を表示
+      
     
   def send_mail(self):
     from mail import send_mail
