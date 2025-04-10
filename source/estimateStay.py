@@ -328,6 +328,7 @@ class EstimateStay(tk.Frame):
       
       self.return_btn = tk.Button(self, text='戻る', command=self.returnbtn2)
       self.return_btn.grid(row=20, column=5, padx=10, pady=5, sticky='ew')
+      
   def returnbtn2(self):
       from stay import Stay  # Banquet クラスをインポート
       self.destroy()  # 現在のウィンドウを閉じる
