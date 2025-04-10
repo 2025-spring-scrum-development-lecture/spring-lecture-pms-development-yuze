@@ -104,6 +104,14 @@ class EstimateBanquet(tk.Frame):
       self.mail_btn.grid(row=18, column=0, padx=10, pady=5)
       self.jason_btn = tk.Button(self, text='ジェイソンファイル保存', command=self.save_to_json)
       self.jason_btn.grid(row=18, column=1, padx=10, pady=5)
+      self.return_btn = tk.Button(self, text='戻る', command=self.returnbtn)
+      self.return_btn.grid(row=18, column=3, padx=10, pady=5, sticky='ew')
+
+      
+  def returnbtn(self):
+      from banquet import Banquet  # Banquet クラスをインポート
+      self.destroy()  # 現在のウィンドウを閉じる
+      Banquet(self.master, self.name, self.mail)  # 新しい画面を表示
       
 
   def save_to_json(self):
