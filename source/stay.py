@@ -5,9 +5,11 @@ from datetime import datetime
 import calendar
 
 class Stay(tk.Frame):
-    def __init__(self, master):
-        super().__init__(master)
+    def __init__(self, master, name, mail):
+        super().__init__(master,)
         self.pack(fill=tk.BOTH, expand=True)
+        self.name = name
+        self.mail = mail
         master.state('zoomed')
         master.geometry('1000x600')  # 高さを指定
         master.title('Hello Tkinter')
@@ -266,13 +268,17 @@ class Stay(tk.Frame):
         # 早割りのラベル
         self.label_early_discount = tk.Label(self.frame, text="早割り")
         self.label_early_discount.grid(row=18, column=0, padx=10, pady=10, sticky='e')
+        # 土日祝日のチェックボタン(true/false)
+        self.check_sunday_var = tk.BooleanVar()
+        self.check_sunday = tk.Checkbutton(self.frame, text="土日祝日", variable=self.check_sunday_var, width=20)
+        self.check_sunday.grid(row=18, column=1, padx=5, pady=5, sticky='w')
         # 早割りのラジオボタン
         self.early_discount_var = tk.StringVar(value="なし")  # デフォルトはなし
-        self.radio_2000 = tk.Radiobutton(self.frame, text="土日祝+2,000", variable=self.early_discount_var, value="2000", width=20)
+        # self.radio_2000 = tk.Radiobutton(self.frame, text="土日祝+2,000", variable=self.early_discount_var, value="2000", width=20)
         self.radio_60 = tk.Radiobutton(self.frame, text="60日以前 10%", variable=self.early_discount_var, value="60", width=20)
         self.radio_90 = tk.Radiobutton(self.frame, text="90日以前 15%", variable=self.early_discount_var, value="90", width=20)
         self.radio_no_discount = tk.Radiobutton(self.frame, text="なし", variable=self.early_discount_var, value="なし", width=20)
-        self.radio_2000.grid(row=18, column=1, padx=5, pady=5, sticky='w')
+        # self.radio_2000.grid(row=18, column=1, padx=5, pady=5, sticky='w')
         self.radio_60.grid(row=19, column=1, padx=5, pady=5, sticky='w')
         self.radio_90.grid(row=20, column=1, padx=5, pady=5, sticky='w')
         self.radio_no_discount.grid(row=21, column=1, padx=5, pady=5, sticky='w')
@@ -377,99 +383,107 @@ class Stay(tk.Frame):
             self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
                
     def goto_estimate(self):
+        def safe_int(value):
+            return int(value) if value.isdigit() else 0
+        
         # 和室 (本館和室7.5畳)
-        wasitu1_otona_poku = self.entry_stay1_1.get()
-        wasitu1_kodomo_poku = self.entry_stay1_2.get()
-        wasitu1_otona_iwategyu = self.entry_stay1_3.get()
-        wasitu1_kodomo_iwategyu = self.entry_stay1_4.get()
-        wasitu1_otona_maezawagyu = self.entry_stay1_5.get()
-        wasitu1_kodomo_maezawagyu = self.entry_stay1_6.get()
-        
+        wasitu1_otona_poku = safe_int(self.entry_stay1_1.get())
+        wasitu1_kodomo_poku = safe_int(self.entry_stay1_2.get())
+        wasitu1_otona_iwategyu = safe_int(self.entry_stay1_3.get())
+        wasitu1_kodomo_iwategyu = safe_int(self.entry_stay1_4.get())
+        wasitu1_otona_maezawagyu = safe_int(self.entry_stay1_5.get())
+        wasitu1_kodomo_maezawagyu = safe_int(self.entry_stay1_6.get())
+
         # 1F西館洋室
-        nishikan1_otona_poku = self.entry_stay2_1.get()
-        nishikan1_kodomo_poku = self.entry_stay2_2.get()
-        nishikan1_otona_iwategyu = self.entry_stay2_3.get()
-        nishikan1_kodomo_iwategyu = self.entry_stay2_4.get()
-        nishikan1_otona_maezawagyu = self.entry_stay2_5.get()
-        nishikan1_kodomo_maezawagyu = self.entry_stay2_6.get()
-        
+        nishikan1_otona_poku = safe_int(self.entry_stay2_1.get())
+        nishikan1_kodomo_poku = safe_int(self.entry_stay2_2.get())
+        nishikan1_otona_iwategyu = safe_int(self.entry_stay2_3.get())
+        nishikan1_kodomo_iwategyu = safe_int(self.entry_stay2_4.get())
+        nishikan1_otona_maezawagyu = safe_int(self.entry_stay2_5.get())
+        nishikan1_kodomo_maezawagyu = safe_int(self.entry_stay2_6.get())
+
         # 岩手山側和室
-        iwatesan_otona_poku = self.entry_stay3_1.get()
-        iwatesan_kodomo_poku = self.entry_stay3_2.get()
-        iwatesan_otona_iwategyu = self.entry_stay3_3.get()
-        iwatesan_kodomo_iwategyu = self.entry_stay3_4.get()
-        iwatesan_otona_maezawagyu = self.entry_stay3_5.get()
-        iwatesan_kodomo_maezawagyu = self.entry_stay3_6.get()
-        
+        iwatesan_otona_poku = safe_int(self.entry_stay3_1.get())
+        iwatesan_kodomo_poku = safe_int(self.entry_stay3_2.get())
+        iwatesan_otona_iwategyu = safe_int(self.entry_stay3_3.get())
+        iwatesan_kodomo_iwategyu = safe_int(self.entry_stay3_4.get())
+        iwatesan_otona_maezawagyu = safe_int(self.entry_stay3_5.get())
+        iwatesan_kodomo_maezawagyu = safe_int(self.entry_stay3_6.get())
+
         # 岩手山側露天風呂付き和室
-        iwatesan_roten_otona_poku = self.entry_stay4_1.get()
-        iwatesan_roten_kodomo_poku = self.entry_stay4_2.get()
-        iwatesan_roten_otona_iwategyu = self.entry_stay4_3.get()
-        iwatesan_roten_kodomo_iwategyu = self.entry_stay4_4.get()
-        iwatesan_roten_otona_maezawagyu = self.entry_stay4_5.get()
-        iwatesan_roten_kodomo_maezawagyu = self.entry_stay4_6.get()
-        
+        iwatesan_roten_otona_poku = safe_int(self.entry_stay4_1.get())
+        iwatesan_roten_kodomo_poku = safe_int(self.entry_stay4_2.get())
+        iwatesan_roten_otona_iwategyu = safe_int(self.entry_stay4_3.get())
+        iwatesan_roten_kodomo_iwategyu = safe_int(self.entry_stay4_4.get())
+        iwatesan_roten_otona_maezawagyu = safe_int(self.entry_stay4_5.get())
+        iwatesan_roten_kodomo_maezawagyu = safe_int(self.entry_stay4_6.get())
+
         # 西館和室10畳
-        nishikan10_otona_poku = self.entry_stay5_1.get()
-        nishikan10_kodomo_poku = self.entry_stay5_2.get()
-        nishikan10_otona_iwategyu = self.entry_stay5_3.get()
-        nishikan10_kodomo_iwategyu = self.entry_stay5_4.get()
-        nishikan10_otona_maezawagyu = self.entry_stay5_5.get()
-        nishikan10_kodomo_maezawagyu = self.entry_stay5_6.get()
-        
+        nishikan10_otona_poku = safe_int(self.entry_stay5_1.get())
+        nishikan10_kodomo_poku = safe_int(self.entry_stay5_2.get())
+        nishikan10_otona_iwategyu = safe_int(self.entry_stay5_3.get())
+        nishikan10_kodomo_iwategyu = safe_int(self.entry_stay5_4.get())
+        nishikan10_otona_maezawagyu = safe_int(self.entry_stay5_5.get())
+        nishikan10_kodomo_maezawagyu = safe_int(self.entry_stay5_6.get())
+
         # 1F檜内風呂付き和洋室
-        hinoki_otona_poku = self.entry_stay6_1.get()
-        hinoki_kodomo_poku = self.entry_stay6_2.get()
-        hinoki_otona_iwategyu = self.entry_stay6_3.get()
-        hinoki_kodomo_iwategyu = self.entry_stay6_4.get()
-        hinoki_otona_maezawagyu = self.entry_stay6_5.get()
-        hinoki_kodomo_maezawagyu = self.entry_stay6_6.get()
-        
+        hinoki_otona_poku = safe_int(self.entry_stay6_1.get())
+        hinoki_kodomo_poku = safe_int(self.entry_stay6_2.get())
+        hinoki_otona_iwategyu = safe_int(self.entry_stay6_3.get())
+        hinoki_kodomo_iwategyu = safe_int(self.entry_stay6_4.get())
+        hinoki_otona_maezawagyu = safe_int(self.entry_stay6_5.get())
+        hinoki_kodomo_maezawagyu = safe_int(self.entry_stay6_6.get())
+
         # 1F西館和洋室
-        nishikan1F_otona_poku = self.entry_stay7_1.get()
-        nishikan1F_kodomo_poku = self.entry_stay7_2.get()
-        nishikan1F_otona_iwategyu = self.entry_stay7_3.get()
-        nishikan1F_kodomo_iwategyu = self.entry_stay7_4.get()
-        nishikan1F_otona_maezawagyu = self.entry_stay7_5.get()
-        nishikan1F_kodomo_maezawagyu = self.entry_stay7_6.get()
-        
+        nishikan1F_otona_poku = safe_int(self.entry_stay7_1.get())
+        nishikan1F_kodomo_poku = safe_int(self.entry_stay7_2.get())
+        nishikan1F_otona_iwategyu = safe_int(self.entry_stay7_3.get())
+        nishikan1F_kodomo_iwategyu = safe_int(self.entry_stay7_4.get())
+        nishikan1F_otona_maezawagyu = safe_int(self.entry_stay7_5.get())
+        nishikan1F_kodomo_maezawagyu = safe_int(self.entry_stay7_6.get())
+
         # 西館和室28畳
-        nishikan28_otona_poku = self.entry_stay8_1.get()
-        nishikan28_kodomo_poku = self.entry_stay8_2.get()
-        nishikan28_otona_iwategyu = self.entry_stay8_3.get()
-        nishikan28_kodomo_iwategyu = self.entry_stay8_4.get()
-        nishikan28_otona_maezawagyu = self.entry_stay8_5.get()
-        nishikan28_kodomo_maezawagyu = self.entry_stay8_6.get()
+        nishikan28_otona_poku = safe_int(self.entry_stay8_1.get())
+        nishikan28_kodomo_poku = safe_int(self.entry_stay8_2.get())
+        nishikan28_otona_iwategyu = safe_int(self.entry_stay8_3.get())
+        nishikan28_kodomo_iwategyu = safe_int(self.entry_stay8_4.get())
+        nishikan28_otona_maezawagyu = safe_int(self.entry_stay8_5.get())
+        nishikan28_kodomo_maezawagyu = safe_int(self.entry_stay8_6.get())
         
         
         ## 現在選択されている月・日・宿泊数・早割りの内容を取得
+        self.check_sunday = self.check_sunday_var.get()
         selected_month = self.month_var.get()
         selected_day = self.day_var.get()
-        selected_stay_count = self.stay_count_var.get()
-        selected_early_discount = self.early_discount_var.get()
-        
-        dog_wan_adult = self.entry_dog_wan_adult.get()
-        dog_wan_child = self.entry_dog_wan_child.get()
-        gan_stay = self.entry_stay.get()
-        gan_no_stay = self.entry_no_stay.get()
-        pata_otona = self.entry_pata_otona.get()
-        pata_kodomo = self.entry_pata_kodomo.get()
-        paku_otona = self.entry_paku_otona.get()
-        paku_kodomo = self.entry_paku_kodomo.get()
-        teni_stay = self.entry_teni_stay.get()
-        teni_no_stay = self.entry_teni_no_stay.get()
-        teni_en = self.entry_teni_en.get()
-        teni_ball = self.entry_teni_ball.get()
-        kasikiri_num = self.entry_kasikiri_num.get()
-        
-    
-        self.destroy()
-        from estimateStay import EstimateStay
-        EstimateStay(wasitu1_kodomo_iwategyu, wasitu1_kodomo_maezawagyu, wasitu1_otona_iwategyu, wasitu1_otona_maezawagyu, wasitu1_kodomo_poku, wasitu1_otona_poku, nishikan1_kodomo_iwategyu, nishikan1_kodomo_maezawagyu, nishikan1_otona_iwategyu, nishikan1_otona_maezawagyu, nishikan1_kodomo_poku, nishikan1_otona_poku, iwatesan_kodomo_iwategyu, iwatesan_kodomo_maezawagyu, iwatesan_otona_iwategyu, iwatesan_otona_maezawagyu, iwatesan_kodomo_poku, iwatesan_otona_poku, iwatesan_roten_kodomo_iwategyu, iwatesan_roten_kodomo_maezawagyu, iwatesan_roten_otona_iwategyu, iwatesan_roten_otona_maezawagyu, iwatesan_roten_kodomo_poku, iwatesan_roten_otona_poku, nishikan10_kodomo_iwategyu, nishikan10_kodomo_maezawagyu, nishikan10_otona_iwategyu, nishikan10_otona_maezawagyu, nishikan10_kodomo_poku, nishikan10_otona_poku,
-        hinoki_kodomo_iwategyu, hinoki_kodomo_maezawagyu, hinoki_otona_iwategyu, hinoki_otona_maezawagyu, hinoki_kodomo_poku, hinoki_otona_poku, nishikan1F_kodomo_iwategyu, nishikan1F_kodomo_maezawagyu, nishikan1F_otona_iwategyu, nishikan1F_otona_maezawagyu, nishikan1F_kodomo_poku, nishikan1F_otona_poku, nishikan28_kodomo_iwategyu, nishikan28_kodomo_maezawagyu, nishikan28_otona_iwategyu, nishikan28_otona_maezawagyu, nishikan28_kodomo_poku, nishikan28_otona_poku,selected_month, selected_day, selected_stay_count, selected_early_discount, dog_wan_adult, dog_wan_child, gan_stay, gan_no_stay, pata_otona, pata_kodomo, paku_otona, paku_kodomo, teni_stay, teni_no_stay, teni_en, teni_ball, kasikiri_num)
-    
-        
+        selected_stay_count = safe_int(self.stay_count_var.get())
+        selected_early_discount = safe_int(self.early_discount_var.get())
 
-root = tk.Tk()
-app = Stay(master=root)
-app.mainloop()
+        dog_wan_adult = safe_int(self.entry_dog_wan_adult.get())
+        dog_wan_child = safe_int(self.entry_dog_wan_child.get())
+        gan_stay = safe_int(self.entry_stay.get())
+        gan_no_stay = safe_int(self.entry_no_stay.get())
+        pata_otona = safe_int(self.entry_pata_otona.get())
+        pata_kodomo = safe_int(self.entry_pata_kodomo.get())
+        paku_otona = safe_int(self.entry_paku_otona.get())
+        paku_kodomo = safe_int(self.entry_paku_kodomo.get())
+        teni_stay = safe_int(self.entry_teni_stay.get())
+        teni_no_stay = safe_int(self.entry_no_stay.get())
+        teni_en = safe_int(self.entry_teni_en.get())
+        teni_ball = safe_int(self.entry_teni_ball.get())
+        kasikiri_num = safe_int(self.entry_kasikiri_num.get())
+    
+        self.frame.destroy()
+        self.canvas.destroy()
+        self.destroy()
+        
+        # 見積もり画面に遷移
+        from estimateStay import EstimateStay
+        EstimateStay(self.master, wasitu1_kodomo_iwategyu, wasitu1_kodomo_maezawagyu, wasitu1_otona_iwategyu, wasitu1_otona_maezawagyu, wasitu1_kodomo_poku, wasitu1_otona_poku, nishikan1_kodomo_iwategyu, nishikan1_kodomo_maezawagyu, nishikan1_otona_iwategyu, nishikan1_otona_maezawagyu, nishikan1_kodomo_poku, nishikan1_otona_poku, iwatesan_kodomo_iwategyu, iwatesan_kodomo_maezawagyu, iwatesan_otona_iwategyu, iwatesan_otona_maezawagyu, iwatesan_kodomo_poku, iwatesan_otona_poku, iwatesan_roten_kodomo_iwategyu, iwatesan_roten_kodomo_maezawagyu, iwatesan_roten_otona_iwategyu, iwatesan_roten_otona_maezawagyu, iwatesan_roten_kodomo_poku, iwatesan_roten_otona_poku, nishikan10_kodomo_iwategyu, nishikan10_kodomo_maezawagyu, nishikan10_otona_iwategyu, nishikan10_otona_maezawagyu, nishikan10_kodomo_poku, nishikan10_otona_poku,
+        hinoki_kodomo_iwategyu, hinoki_kodomo_maezawagyu, hinoki_otona_iwategyu, hinoki_otona_maezawagyu, hinoki_kodomo_poku, hinoki_otona_poku, nishikan1F_kodomo_iwategyu, nishikan1F_kodomo_maezawagyu, nishikan1F_otona_iwategyu, nishikan1F_otona_maezawagyu, nishikan1F_kodomo_poku, nishikan1F_otona_poku, nishikan28_kodomo_iwategyu, nishikan28_kodomo_maezawagyu, nishikan28_otona_iwategyu, nishikan28_otona_maezawagyu, nishikan28_kodomo_poku, nishikan28_otona_poku,selected_month, selected_day, selected_stay_count, selected_early_discount, dog_wan_adult, dog_wan_child, gan_stay, gan_no_stay, pata_otona, pata_kodomo, paku_otona, paku_kodomo, teni_stay, teni_no_stay, teni_en, teni_ball, kasikiri_num, self.name, self.mail, self.check_sunday)
+    
+        
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = Stay(root, 1, 1)
+    app.mainloop()
+

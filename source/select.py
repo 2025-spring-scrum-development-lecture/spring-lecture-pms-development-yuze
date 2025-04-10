@@ -93,7 +93,9 @@ class Application(tk.Frame):
             from banquet import Banquet
             Banquet(self.master, name, mail)
         elif selection == "宿泊":
-            messagebox.showinfo("選択", "宿泊を選択しました。")
+            from stay import Stay
+            self.destroy()
+            Stay(self.master, name, mail)
             
 if __name__ == '__main__':
     root = tk.Tk()

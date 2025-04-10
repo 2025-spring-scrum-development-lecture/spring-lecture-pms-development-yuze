@@ -329,14 +329,21 @@ class EstimateStay(tk.Frame):
     
   def send_mail(self):
     from mail import send_mail
+
+    self.selected_day = str(self.selected_day)
+    self.selected_month = str(self.selected_month)
+    self.selected_stay_count = str(self.selected_stay_count)
+    self.total_price = str(self.total_price)
+    self.name = str(self.name)
+    self.mail = str(self.mail)
     body = f"""
     {self.name}様の見積もり内容です。
     <br>宿泊日：{self.selected_month}月{self.selected_day}日
     <br>宿泊数：{self.selected_stay_count}泊
     <br>合計金額：{self.total_price}円
     """
+    send_mail(self.mail, '宿泊見積もり', body)
 
-    send_mail(self.mail, '宴会見積もり', body)
     
   
   def save_to_json(self):
