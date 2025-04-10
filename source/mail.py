@@ -1,39 +1,37 @@
+import os
 from smtplib import SMTP
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 
-def send_mail(from_id, from_pass, to, subject, body):
+def send_mail(to, subject, body):
+    ID = 'c.yuze.sys24@morijyobi.ac.jp'
+    PASS = os.environ['MAIL_PASS']
     HOST = 'smtp.gmail.com'
     PORT = 587
-
-    # メールの内容を作成
+    
     msg = MIMEMultipart()
+    
     msg.attach(MIMEText(body, 'html'))
+    
     msg['Subject'] = subject
-    msg['From'] = from_id
+    msg['From'] = ID
     msg['To'] = to
-
+    # msg['Cc'] = cc
+    # msg['Bcc'] = bcc
+    
+    # file_name = os.path.basename(file_path)
+    # f = open(file_path, 'rb')
+    # attachment = MIMEApplication(f.read(), Name=file_name)
+    # attachment.add_header('Content-Disposition', 'attachment', filename=file_name)
+    # f.close()
+    # msg.attach(attachment)
+    
     # ここから送信処理
-    try:
-        # GmailのSMTPサーバーを利用
-        server = SMTP(HOST, PORT)
-        server.starttls()  # TLS（セキュリティ機能）を開始
-        server.login(from_id, from_pass)  # 入力されたメールアドレスとパスワードでログイン
-        server.send_message(msg)  # メール送信
-        server.quit()  # 接続終了
-        print("メールが送信されました")
-    except Exception as e:
-        print(f"エラーが発生しました: {e}")
-
-
-if __name__ == "__main__":
-    # ユーザーにメール情報を入力してもらう
-    from_id = input("送信者のメールアドレスを入力してください: ")
-    from_pass = input("送信者のメールアドレスのパスワードを入力してください: ")
-    to = input("受信者のメールアドレスを入力してください: ")
-    subject = input("メールの件名を入力してください: ")
-    body = input("メールの本文を入力してください: ")
-
-    send_mail(from_id, from_pass, to, subject, body)
+    server = SMTP(HOST, PORT)
+    server.starttls()
+    server.login(ID, PASS)
+    
+    server.send_message(msg)
+    server.quit()
