@@ -383,15 +383,15 @@ class Stay(tk.Frame):
         wasitu1_otona_iwategyu = self.entry_stay1_3.get()
         wasitu1_kodomo_iwategyu = self.entry_stay1_4.get()
         wasitu1_otona_maezawagyu = self.entry_stay1_5.get()
-        wasitu1_otona_maezawagyu = self.entry_stay1_6.get()
+        wasitu1_kodomo_maezawagyu = self.entry_stay1_6.get()
         
         # 1F西館洋室
         nishikan1_otona_poku = self.entry_stay2_1.get()
-        nishikan1_otona_poku = self.entry_stay2_2.get()
+        nishikan1_kodomo_poku = self.entry_stay2_2.get()
         nishikan1_otona_iwategyu = self.entry_stay2_3.get()
-        nishikan1_otona_iwategyu = self.entry_stay2_4.get()
+        nishikan1_kodomo_iwategyu = self.entry_stay2_4.get()
         nishikan1_otona_maezawagyu = self.entry_stay2_5.get()
-        nishikan1_otona_maezawagyu = self.entry_stay2_6.get()
+        nishikan1_kodomo_maezawagyu = self.entry_stay2_6.get()
         
         # 岩手山側和室
         iwatesan_otona_poku = self.entry_stay3_1.get()
@@ -399,7 +399,7 @@ class Stay(tk.Frame):
         iwatesan_otona_iwategyu = self.entry_stay3_3.get()
         iwatesan_kodomo_iwategyu = self.entry_stay3_4.get()
         iwatesan_otona_maezawagyu = self.entry_stay3_5.get()
-        iwatesan_otona_maezawagyu = self.entry_stay3_6.get()
+        iwatesan_kodomo_maezawagyu = self.entry_stay3_6.get()
         
         # 岩手山側露天風呂付き和室
         iwatesan_roten_otona_poku = self.entry_stay4_1.get()
@@ -407,7 +407,7 @@ class Stay(tk.Frame):
         iwatesan_roten_otona_iwategyu = self.entry_stay4_3.get()
         iwatesan_roten_kodomo_iwategyu = self.entry_stay4_4.get()
         iwatesan_roten_otona_maezawagyu = self.entry_stay4_5.get()
-        iwatesan_roten_otona_maezawagyu = self.entry_stay4_6.get()
+        iwatesan_roten_kodomo_maezawagyu = self.entry_stay4_6.get()
         
         # 西館和室10畳
         nishikan10_otona_poku = self.entry_stay5_1.get()
@@ -415,7 +415,7 @@ class Stay(tk.Frame):
         nishikan10_otona_iwategyu = self.entry_stay5_3.get()
         nishikan10_kodomo_iwategyu = self.entry_stay5_4.get()
         nishikan10_otona_maezawagyu = self.entry_stay5_5.get()
-        nishikan10_otona_maezawagyu = self.entry_stay5_6.get()
+        nishikan10_kodomo_maezawagyu = self.entry_stay5_6.get()
         
         # 1F檜内風呂付き和洋室
         hinoki_otona_poku = self.entry_stay6_1.get()
@@ -423,7 +423,7 @@ class Stay(tk.Frame):
         hinoki_otona_iwategyu = self.entry_stay6_3.get()
         hinoki_kodomo_iwategyu = self.entry_stay6_4.get()
         hinoki_otona_maezawagyu = self.entry_stay6_5.get()
-        hinoki_otona_maezawagyu = self.entry_stay6_6.get()
+        hinoki_kodomo_maezawagyu = self.entry_stay6_6.get()
         
         # 1F西館和洋室
         nishikan1F_otona_poku = self.entry_stay7_1.get()
@@ -431,7 +431,7 @@ class Stay(tk.Frame):
         nishikan1F_otona_iwategyu = self.entry_stay7_3.get()
         nishikan1F_kodomo_iwategyu = self.entry_stay7_4.get()
         nishikan1F_otona_maezawagyu = self.entry_stay7_5.get()
-        nishikan1F_otona_maezawagyu = self.entry_stay7_6.get()
+        nishikan1F_kodomo_maezawagyu = self.entry_stay7_6.get()
         
         # 西館和室28畳
         nishikan28_otona_poku = self.entry_stay8_1.get()
@@ -465,8 +465,8 @@ class Stay(tk.Frame):
     
         self.destroy()
         from estimateStay import EstimateStay
-        EstimateStay(self.master, wasitu1_otona_poku, wasitu1_kodomo_poku, wasitu1_otona_iwategyu, wasitu1_kodomo_iwategyu, wasitu1_otona_maezawagyu, wasitu1_otona_maezawagyu, nishikan1_otona_poku, nishikan1_otona_poku, nishikan1_otona_iwategyu, nishikan1_otona_iwategyu, nishikan1_otona_maezawagyu, nishikan1_otona_maezawagyu, iwatesan_otona_poku, iwatesan_kodomo_poku, iwatesan_otona_iwategyu, iwatesan_kodomo_iwategyu, iwatesan_otona_maezawagyu, iwatesan_otona_maezawagyu, iwatesan_roten_otona_poku, iwatesan_roten_kodomo_poku, iwatesan_roten_otona_iwategyu, iwatesan_roten_kodomo_iwategyu, iwatesan_roten_otona_maezawagyu, iwatesan_roten_otona_maezawagyu,nishikan10_otona_poku,nishikan10_kodomo_poku,nishikan10_otona_iwategyu,nishikan10_kodomo_iwategyu,nishikan10_otona_maezawagyu,nishikan10_otona_maezawagyu,hinoki_otona_poku,hinoki_kodomo_poku,hinoki_otona_iwategyu,hinoki_kodomo_iwategyu,hinoki_otona_maezawagyu,hinoki_otona_maezawagyu,nishikan1F_otona_poku,nishikan1F_kodomo_poku,nishikan1F_otona_iwategyu,nishikan1F_kodomo_iwategyu,nishikan1F_otona_maezawagyu,nishikan1F_otona_maezawagyu,nishikan28_otona_poku,nishikan28_kodomo_poku,nishikan28_otona_iwategyu,nishikan28_kodomo_iwategyu,nishikan28_otona_maezawagyu
-                     , nishikan28_kodomo_maezawagyu, selected_month, selected_day, selected_stay_count, selected_early_discount, dog_wan_adult, dog_wan_child, gan_stay, gan_no_stay, pata_otona, pata_kodomo, paku_otona, paku_kodomo, teni_stay, teni_no_stay, teni_en, teni_ball, kasikiri_num)
+        EstimateStay(wasitu1_kodomo_iwategyu, wasitu1_kodomo_maezawagyu, wasitu1_otona_iwategyu, wasitu1_otona_maezawagyu, wasitu1_kodomo_poku, wasitu1_otona_poku, nishikan1_kodomo_iwategyu, nishikan1_kodomo_maezawagyu, nishikan1_otona_iwategyu, nishikan1_otona_maezawagyu, nishikan1_kodomo_poku, nishikan1_otona_poku, iwatesan_kodomo_iwategyu, iwatesan_kodomo_maezawagyu, iwatesan_otona_iwategyu, iwatesan_otona_maezawagyu, iwatesan_kodomo_poku, iwatesan_otona_poku, iwatesan_roten_kodomo_iwategyu, iwatesan_roten_kodomo_maezawagyu, iwatesan_roten_otona_iwategyu, iwatesan_roten_otona_maezawagyu, iwatesan_roten_kodomo_poku, iwatesan_roten_otona_poku, nishikan10_kodomo_iwategyu, nishikan10_kodomo_maezawagyu, nishikan10_otona_iwategyu, nishikan10_otona_maezawagyu, nishikan10_kodomo_poku, nishikan10_otona_poku,
+        hinoki_kodomo_iwategyu, hinoki_kodomo_maezawagyu, hinoki_otona_iwategyu, hinoki_otona_maezawagyu, hinoki_kodomo_poku, hinoki_otona_poku, nishikan1F_kodomo_iwategyu, nishikan1F_kodomo_maezawagyu, nishikan1F_otona_iwategyu, nishikan1F_otona_maezawagyu, nishikan1F_kodomo_poku, nishikan1F_otona_poku, nishikan28_kodomo_iwategyu, nishikan28_kodomo_maezawagyu, nishikan28_otona_iwategyu, nishikan28_otona_maezawagyu, nishikan28_kodomo_poku, nishikan28_otona_poku,selected_month, selected_day, selected_stay_count, selected_early_discount, dog_wan_adult, dog_wan_child, gan_stay, gan_no_stay, pata_otona, pata_kodomo, paku_otona, paku_kodomo, teni_stay, teni_no_stay, teni_en, teni_ball, kasikiri_num)
     
         
 
