@@ -329,6 +329,7 @@ class EstimateStay(tk.Frame):
     
   def send_mail(self):
     from mail import send_mail
+
     self.selected_day = str(self.selected_day)
     self.selected_month = str(self.selected_month)
     self.selected_stay_count = str(self.selected_stay_count)
@@ -342,6 +343,7 @@ class EstimateStay(tk.Frame):
     <br>合計金額：{self.total_price}円
     """
     send_mail(self.mail, '宿泊見積もり', body)
+
     
   
   def save_to_json(self):
