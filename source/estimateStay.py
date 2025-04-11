@@ -346,7 +346,7 @@ class EstimateStay(tk.Frame):
     self.mail = str(self.mail)
     body = f"""
     {self.name}様の見積もり内容です。
-    <br>宿泊日：{self.selected_month}月{self.selected_day}日
+    <br>宿泊日：{self.selected_month}{self.selected_day}日
     <br>宿泊数：{self.selected_stay_count}泊
     <br>合計金額：{self.total_price}円
     """
