@@ -3,6 +3,7 @@ from tkinter import ttk
 import json
 import datetime
 from tkinter import filedialog
+from tkinter import messagebox
 
 class EstimateBanquet(tk.Frame):
   def __init__(self, master, num_people, month, date, num_gouka, num_miyabi, num_nishiki, num_tubaki, num_nomi, num_loin, num_hormone, num_kushiyaki, num_iwatehuro, num_hinokihuro, increse_date, mail, name):
@@ -136,6 +137,7 @@ class EstimateBanquet(tk.Frame):
         filename = f"{self.name}（{self.mail}）さんの見積もりデータ（宴会）　estimate_{datetime.datetime.now().strftime('%Y_%m_%d_%H%M%S')}.json"
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
+        messagebox.showinfo("保存完了", f"{filename}に保存しました。")
 
     
   def send_mail(self):
@@ -156,7 +158,8 @@ class EstimateBanquet(tk.Frame):
     <br>檜の内風呂付和洋室：{self.num_hinokihuro}部屋
     <br>合計金額：{self.total}円
     """
-    send_mail(self.mail, '宴会見積もり', body)
+    # send_mail(self.mail, '宴会見積もり', body)
+    messagebox.showinfo("メール送信", "メールを送信しました。")
  
       
 if __name__ == '__main__':
