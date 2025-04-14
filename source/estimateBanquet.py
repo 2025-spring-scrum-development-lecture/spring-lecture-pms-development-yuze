@@ -158,7 +158,7 @@ class EstimateBanquet(tk.Frame):
     <br>檜の内風呂付和洋室：{self.num_hinokihuro}部屋
     <br>合計金額：{self.total}円
     """
-    # send_mail(self.mail, '宴会見積もり', body)
+    send_mail(self.mail, '宴会見積もり', body)
     messagebox.showinfo("メール送信", "メールを送信しました。")
  
       
