@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import json
 import datetime
+from tkinter import messagebox
 
 class EstimateStay(tk.Frame):
   def __init__(self, master, wasitu1_kodomo_iwategyu, wasitu1_kodomo_maezawagyu, wasitu1_otona_iwategyu, wasitu1_otona_maezawagyu, wasitu1_kodomo_poku, wasitu1_otona_poku, nishikan1_kodomo_iwategyu, nishikan1_kodomo_maezawagyu, nishikan1_otona_iwategyu, nishikan1_otona_maezawagyu, nishikan1_kodomo_poku, nishikan1_otona_poku, iwatesan_kodomo_iwategyu, iwatesan_kodomo_maezawagyu, iwatesan_otona_iwategyu, iwatesan_otona_maezawagyu, iwatesan_kodomo_poku, iwatesan_otona_poku, iwatesan_roten_kodomo_iwategyu, iwatesan_roten_kodomo_maezawagyu, iwatesan_roten_otona_iwategyu, iwatesan_roten_otona_maezawagyu, iwatesan_roten_kodomo_poku, iwatesan_roten_otona_poku, nishikan10_kodomo_iwategyu, nishikan10_kodomo_maezawagyu, nishikan10_otona_iwategyu, nishikan10_otona_maezawagyu, nishikan10_kodomo_poku, nishikan10_otona_poku,
@@ -351,6 +352,7 @@ class EstimateStay(tk.Frame):
     <br>合計金額：{self.total_price}円
     """
     send_mail(self.mail, '宿泊見積もり', body)
+    messagebox.showinfo("メール送信", f"{self.mail}に見積もりを送信しました。")
 
     
   
@@ -390,7 +392,7 @@ class EstimateStay(tk.Frame):
     filename = f"{self.name}（{self.mail}）さんの見積もりデータ（宿泊）　estimate_{datetime.datetime.now().strftime('%Y_%m_%d_%H%M%S')}.json"
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-
+    messagebox.showinfo("保存完了", f"{filename}に保存しました。")
 
       
 if __name__ == '__main__':
